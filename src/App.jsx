@@ -2,8 +2,7 @@ import { useState } from 'react'
 import './App.css'
 
 const sharedButtonStyle =
-'h-full w-32 cursor-pointer bg-gray-300 text-gray-600 outline-none hover:bg-gray-400 hover:text-gray-700'
-
+  'h-full w-32 cursor-pointer bg-gray-300 text-gray-600 outline-none hover:bg-gray-400 hover:text-gray-700'
 
 function App() {
   const [totalQuestions, setTotalQuestions] = useState(5) //ユーザーが解く問題の数を格納する
@@ -23,13 +22,12 @@ function App() {
     }
   }
 
-  const changeTotalQuestions = (e) => {
+  const changeTotalQuestions = e => {
     const inputNumber = parseInt(e.target.value)
-    if (inputNumber >= 1  && inputNumber <= 100){
+    if (inputNumber >= 1 && inputNumber <= 100) {
       setTotalQuestions(inputNumber)
     }
   }
-
 
   const [score, setScore] = useState(0)
   return (
@@ -58,7 +56,7 @@ function App() {
                 </button>
                 <input
                   type="number"
-                  className="sm:text-md md:text-base  w-full bg-gray-300 text-center text-lg font-semibold text-gray-700 outline-none hover:text-black focus:text-black focus:outline-none"
+                  className="sm:text-md w-full  bg-gray-300 text-center text-lg font-semibold text-gray-700 outline-none hover:text-black focus:text-black focus:outline-none md:text-base"
                   name="custom-input-number"
                   value={totalQuestions}
                   min="1"
