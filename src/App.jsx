@@ -62,7 +62,7 @@ function App() {
                   min="1"
                   max="100"
                   onChange={changeTotalQuestions}
-                ></input>
+                />
                 <button
                   className={`${sharedButtonStyle} rounded-r`}
                   onClick={incrementTotalQuestions}
