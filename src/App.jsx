@@ -31,8 +31,8 @@ function App() {
 
   const [score, setScore] = useState(0)
   return (
-    <div className="h-screen bg-amber-600">
-      <div className="mx-auto max-w-screen-xl px-4 pt-12 md:px-8">
+    <div className="min-h-screen bg-amber-600">
+      <div className="mx-auto max-w-screen-xl px-4 pb-48 pt-12 md:px-8">
         <div className="flex flex-col items-center rounded-lg bg-gray-100 p-4 sm:p-8">
           <div className="mb-4 sm:mb-8">
             <h2 className="text-center text-2xl font-bold text-gray-600 sm:text-3xl lg:text-4xl">
