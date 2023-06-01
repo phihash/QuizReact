@@ -1,11 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
+import { db } from './firebase'
+import { collection, getDocs } from 'firebase/firestore'
 
 const sharedButtonStyle =
   'h-full w-32 cursor-pointer bg-gray-300 text-gray-600 outline-none hover:bg-gray-400 hover:text-gray-700'
 
 function App() {
   const [totalQuestions, setTotalQuestions] = useState(5) //ユーザーが解く問題の数を格納する
+  const [quizzes, setQuizzes] = useState([])
+  const [score, setScore] = useState(0)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, 'quizzes'))
+      querySnapshot.forEach(doc => {
+        console.log(doc.data())
+      })
+    }
+
+    fetchData()
+  }, [])
 
   const incrementTotalQuestions = () => {
     if (totalQuestions > 99) {
@@ -29,7 +44,6 @@ function App() {
     }
   }
 
-  const [score, setScore] = useState(0)
   return (
     <div className="min-h-screen bg-amber-600">
       <div className="mx-auto max-w-screen-xl px-4 pb-48 pt-12 md:px-8">
