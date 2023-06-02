@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import RunningQuiz from './RunningQuiz'
 import './App.css'
 
 const sharedButtonStyle =
@@ -32,11 +33,11 @@ function App() {
     }
   }
 
-  const isStarted = () => {
+  const startQuiz = () => {
     setIsQuizStarted(true)
   }
 
-  const isQuit = () => {
+  const quitQuiz = () => {
     setIsQuizStarted(false)
   }
 
@@ -55,66 +56,52 @@ function App() {
           </div>
 
           {!isQuizStarted && (
-            <div className="mb-3 flex w-full max-w-md items-center justify-center gap-6">
-              <div className="custom-number-input flex h-10 w-40 sm:w-40">
-                <div className="relative  flex h-10 w-full flex-row rounded-lg bg-transparent">
-                  <button
-                    className={`${sharedButtonStyle} rounded-l`}
-                    onClick={decrementTotalQuestions}
-                  >
-                    <span className="m-auto text-lg font-bold sm:text-2xl">
-                      -
-                    </span>
-                  </button>
-                  <input
-                    type="number"
-                    className="sm:text-md w-full  bg-gray-300 text-center text-lg font-semibold text-gray-700 outline-none hover:text-black focus:text-black focus:outline-none md:text-base"
-                    name="custom-input-number"
-                    value={totalQuestions}
-                    min="1"
-                    max="100"
-                    onChange={changeTotalQuestions}
-                  />
-                  <button
-                    className={`${sharedButtonStyle} rounded-r`}
-                    onClick={incrementTotalQuestions}
-                  >
-                    <span className="m-auto text-lg font-semibold sm:text-2xl">
-                      +
-                    </span>
-                  </button>
+            <>
+              <div className="mb-3 flex w-full max-w-md items-center justify-center gap-6">
+                <div className="custom-number-input flex h-10 w-40 sm:w-40">
+                  <div className="relative  flex h-10 w-full flex-row rounded-lg bg-transparent">
+                    <button
+                      className={`${sharedButtonStyle} rounded-l`}
+                      onClick={decrementTotalQuestions}
+                    >
+                      <span className="m-auto text-lg font-bold sm:text-2xl">
+                        -
+                      </span>
+                    </button>
+                    <input
+                      type="number"
+                      className="sm:text-md w-full  bg-gray-300 text-center text-lg font-semibold text-gray-700 outline-none hover:text-black focus:text-black focus:outline-none md:text-base"
+                      name="custom-input-number"
+                      value={totalQuestions}
+                      min="1"
+                      max="100"
+                      onChange={changeTotalQuestions}
+                    />
+                    <button
+                      className={`${sharedButtonStyle} rounded-r`}
+                      onClick={incrementTotalQuestions}
+                    >
+                      <span className="m-auto text-lg font-semibold sm:text-2xl">
+                        +
+                      </span>
+                    </button>
+                  </div>
                 </div>
+
+                <button
+                  onClick={startQuiz}
+                  className="items-center rounded border-b-4 border-amber-600 bg-amber-500 px-8 py-2 font-bold text-white hover:border-amber-500 hover:bg-amber-400"
+                >
+                  Start
+                </button>
               </div>
-
-              <button
-                onClick={isStarted}
-                className="items-center rounded border-b-4 border-amber-600 bg-amber-500 px-8 py-2 font-bold text-white hover:border-amber-500 hover:bg-amber-400"
-              >
-                Start
-              </button>
-            </div>
+              <p className="text-center text-sm font-semibold text-gray-500">
+                問題数(1-100)を選択してください
+              </p>
+            </>
           )}
 
-          {isQuizStarted && (
-            <button
-              onClick={isQuit}
-              className="items-center rounded border-b-4 border-red-700 bg-red-600 px-8 py-2 font-bold text-white hover:border-red-600 hover:bg-red-500"
-            >
-              Quit
-            </button>
-          )}
-
-          {isQuizStarted && (
-            <p className="text-center text-2xl font-semibold text-gray-800">
-              クイズをここにかいていく
-            </p>
-          )}
-
-          {!isQuizStarted && (
-            <p className="text-center text-sm font-semibold text-gray-500">
-              問題数(1-100)を選択してください
-            </p>
-          )}
+          {isQuizStarted && <RunningQuiz quitQuiz={quitQuiz}></RunningQuiz>}
         </div>
       </div>
     </div>
