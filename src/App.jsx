@@ -1,15 +1,35 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import RunningQuiz from './RunningQuiz'
 import './App.css'
+import { fetchQuizzes } from './fetchQuizzes'
 
 const sharedButtonStyle =
   'h-full w-32 cursor-pointer bg-gray-300 text-gray-600 outline-none hover:bg-gray-400 hover:text-gray-700'
 
 function App() {
   const [totalQuestions, setTotalQuestions] = useState(5) //ユーザーが解く問題の数を格納する
-  const [isQuizStarted, setIsQuizStarted] = useState(false)
+ 
+
+
+  const [quizzes, setQuizzes] = useState([])
+  const [score, setScore] = useState(0)
+const [isQuizStarted, setIsQuizStarted] = useState(false)
   // const [isQuizFinished , setIsQuizFinished] = useState(false)
   // const [isReviewMode   , setIsReviewMode] = useState(false)
+  useEffect(() => {
+    const fetchData = async () => {
+      fetchQuizzes()
+    }
+
+    fetchData()
+  }, [])
+const startQuiz = () => {
+    setIsQuizStarted(true)
+  }
+
+  const quitQuiz = () => {
+    setIsQuizStarted(false)
+  }
 
   const incrementTotalQuestions = () => {
     if (totalQuestions > 99) {
@@ -33,15 +53,7 @@ function App() {
     }
   }
 
-  const startQuiz = () => {
-    setIsQuizStarted(true)
-  }
 
-  const quitQuiz = () => {
-    setIsQuizStarted(false)
-  }
-
-  const [score, setScore] = useState(0)
   return (
     <div className="min-h-screen bg-amber-600">
       <div className="mx-auto max-w-screen-xl px-4 pb-48 pt-12 md:px-8">
