@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import { db } from './firebase'
-import { collection, getDocs } from 'firebase/firestore'
+import { fetchQuizzes } from './fetchQuizzes'
 
 const sharedButtonStyle =
   'h-full w-32 cursor-pointer bg-gray-300 text-gray-600 outline-none hover:bg-gray-400 hover:text-gray-700'
@@ -13,10 +12,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, 'quizzes'))
-      querySnapshot.forEach(doc => {
-        console.log(doc.data())
-      })
+      fetchQuizzes()
     }
 
     fetchData()
