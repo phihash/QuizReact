@@ -8,22 +8,24 @@ const sharedButtonStyle =
 
 function App() {
   const [totalQuestions, setTotalQuestions] = useState(5) //ユーザーが解く問題の数を格納する
- 
-
-
+  const [currentIndex, setCurrentIndex] = useState(0)
   const [quizzes, setQuizzes] = useState([])
   const [score, setScore] = useState(0)
-const [isQuizStarted, setIsQuizStarted] = useState(false)
+  const [isQuizStarted, setIsQuizStarted] = useState(false)
   // const [isQuizFinished , setIsQuizFinished] = useState(false)
   // const [isReviewMode   , setIsReviewMode] = useState(false)
   useEffect(() => {
     const fetchData = async () => {
-      fetchQuizzes()
+      if (isQuizStarted) {
+        const quizList = await fetchQuizzes()
+        setQuizzes(quizList)
+      }
     }
 
     fetchData()
-  }, [])
-const startQuiz = () => {
+  }, [isQuizStarted])
+
+  const startQuiz = () => {
     setIsQuizStarted(true)
   }
 
@@ -52,7 +54,6 @@ const startQuiz = () => {
       setTotalQuestions(inputNumber)
     }
   }
-
 
   return (
     <div className="min-h-screen bg-amber-600">
@@ -113,7 +114,14 @@ const startQuiz = () => {
             </>
           )}
 
-          {isQuizStarted && <RunningQuiz quitQuiz={quitQuiz}></RunningQuiz>}
+          {isQuizStarted && quizzes.length && (
+            <RunningQuiz
+              quitQuiz={quitQuiz}
+              quizzes={quizzes}
+              setCurrentIndex={setCurrentIndex}
+              currentIndex={currentIndex}
+            ></RunningQuiz>
+          )}
         </div>
       </div>
     </div>
