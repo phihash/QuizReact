@@ -12,6 +12,7 @@ function App() {
   const [quizzes, setQuizzes] = useState([])
   const [score, setScore] = useState(0)
   const [isQuizStarted, setIsQuizStarted] = useState(false)
+  const [selectedChoice, setSelectedChoice] = useState(null)
   // const [isQuizFinished , setIsQuizFinished] = useState(false)
   // const [isReviewMode   , setIsReviewMode] = useState(false)
   useEffect(() => {
@@ -119,6 +120,8 @@ function App() {
               quitQuiz={quitQuiz}
               quizzes={quizzes}
               setCurrentIndex={setCurrentIndex}
+              setSelectedChoice={setSelectedChoice}
+              selectedChoice={selectedChoice}
               currentIndex={currentIndex}
             ></RunningQuiz>
           )}

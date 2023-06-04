@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-const RadioItem = ({ choice, index }) => {
+const RadioItem = ({ choice, index, setSelectedChoice }) => {
   return (
     <div>
       <label
@@ -13,6 +13,7 @@ const RadioItem = ({ choice, index }) => {
           className="pointer-events-none mt-0.5 shrink-0 rounded-full border-gray-200 text-blue-600"
           id={`choice-${index}`}
           value={choice}
+          onChange={e => setSelectedChoice(e.target.value)}
         />
         <span className="ml-3 text-lg font-semibold text-gray-600">
           {choice}
@@ -25,6 +26,7 @@ const RadioItem = ({ choice, index }) => {
 RadioItem.propTypes = {
   choice: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
+  setSelectedChoice: PropTypes.func.isRequired,
 }
 
 export default RadioItem
