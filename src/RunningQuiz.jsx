@@ -8,7 +8,6 @@ const RunningQuiz = ({
   setSelectedChoice,
   selectedChoice,
 }) => {
-  console.log(quizzes)
   const handleNext = () => {
     // 最後の問題に達していないか確認します
     if (currentIndex < quizzes.length - 1) {
@@ -62,7 +61,7 @@ RunningQuiz.propTypes = {
   quitQuiz: PropTypes.func.isRequired,
   currentIndex: PropTypes.number.isRequired,
   setCurrentIndex: PropTypes.func.isRequired,
-  selectedChoice: PropTypes.bool.isRequired,
+  selectedChoice: PropTypes.string,
   setSelectedChoice: PropTypes.func.isRequired,
 }
 
