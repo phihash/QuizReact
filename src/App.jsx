@@ -61,7 +61,7 @@ function App() {
       <div className="mx-auto max-w-screen-xl px-4 pb-48 pt-12 md:px-8">
         <div className="flex flex-col items-center rounded-lg bg-gray-100 p-4 sm:p-8">
           <div className="mb-4 sm:mb-8">
-            <h2 className="text-center text-2xl font-bold text-gray-600 sm:text-3xl lg:text-4xl">
+            <h2 className="mt-6 text-center text-4xl font-bold text-gray-600">
               React Quiz
             </h2>
             <p className="mt-2 text-center font-semibold text-gray-500">
