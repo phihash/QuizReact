@@ -115,7 +115,7 @@ function App() {
             </>
           )}
 
-          {isQuizStarted && quizzes.length && (
+          {/* {isQuizStarted && quizzes.length && (
             <RunningQuiz
               quitQuiz={quitQuiz}
               quizzes={quizzes}
@@ -124,7 +124,24 @@ function App() {
               selectedChoice={selectedChoice}
               currentIndex={currentIndex}
             ></RunningQuiz>
-          )}
+          )} */}
+
+          {isQuizStarted &&
+            (quizzes.length ? (
+              <RunningQuiz
+                quitQuiz={quitQuiz}
+                quizzes={quizzes}
+                setCurrentIndex={setCurrentIndex}
+                setSelectedChoice={setSelectedChoice}
+                selectedChoice={selectedChoice}
+                currentIndex={currentIndex}
+              />
+            ) : (
+              // quizzesが空のときに表示するコンポーネントやメッセージ
+              <p className="text-2xl font-semibold text-gray-700">
+                Loading....
+              </p>
+            ))}
         </div>
       </div>
     </div>
