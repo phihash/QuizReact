@@ -30,9 +30,9 @@ function App() {
     setIsQuizStarted(true)
   }
 
-  const quitQuiz = () => {
-    setIsQuizStarted(false)
-  }
+  // const quitQuiz = () => {
+  //   setIsQuizStarted(false)
+  // }
 
   const incrementTotalQuestions = () => {
     if (totalQuestions > 99) {
@@ -129,7 +129,7 @@ function App() {
           {isQuizStarted &&
             (quizzes.length ? (
               <RunningQuiz
-                quitQuiz={quitQuiz}
+                // quitQuiz={quitQuiz}
                 quizzes={quizzes}
                 setCurrentIndex={setCurrentIndex}
                 setSelectedChoice={setSelectedChoice}
