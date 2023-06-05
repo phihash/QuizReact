@@ -30,10 +30,6 @@ function App() {
     setIsQuizStarted(true)
   }
 
-  // const quitQuiz = () => {
-  //   setIsQuizStarted(false)
-  // }
-
   const incrementTotalQuestions = () => {
     if (totalQuestions > 99) {
       alert('100問以下でお願いします')
@@ -114,17 +110,6 @@ function App() {
               </p>
             </>
           )}
-
-          {/* {isQuizStarted && quizzes.length && (
-            <RunningQuiz
-              quitQuiz={quitQuiz}
-              quizzes={quizzes}
-              setCurrentIndex={setCurrentIndex}
-              setSelectedChoice={setSelectedChoice}
-              selectedChoice={selectedChoice}
-              currentIndex={currentIndex}
-            ></RunningQuiz>
-          )} */}
 
           {isQuizStarted &&
             (quizzes.length ? (
