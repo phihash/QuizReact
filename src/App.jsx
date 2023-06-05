@@ -8,11 +8,9 @@ const sharedButtonStyle =
 
 function App() {
   const [totalQuestions, setTotalQuestions] = useState(5) //ユーザーが解く問題の数を格納する
-  const [currentIndex, setCurrentIndex] = useState(0)
   const [quizzes, setQuizzes] = useState([])
   const [score, setScore] = useState(0)
   const [isQuizStarted, setIsQuizStarted] = useState(false)
-  const [selectedChoice, setSelectedChoice] = useState(null)
   // const [isQuizFinished , setIsQuizFinished] = useState(false)
   // const [isReviewMode   , setIsReviewMode] = useState(false)
   useEffect(() => {
@@ -113,16 +111,8 @@ function App() {
 
           {isQuizStarted &&
             (quizzes.length ? (
-              <RunningQuiz
-                // quitQuiz={quitQuiz}
-                quizzes={quizzes}
-                setCurrentIndex={setCurrentIndex}
-                setSelectedChoice={setSelectedChoice}
-                selectedChoice={selectedChoice}
-                currentIndex={currentIndex}
-              />
+              <RunningQuiz quizzes={quizzes} />
             ) : (
-              // quizzesが空のときに表示するコンポーネントやメッセージ
               <p className="text-2xl font-semibold text-gray-700">
                 Loading....
               </p>
