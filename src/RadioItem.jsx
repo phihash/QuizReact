@@ -1,17 +1,19 @@
 import PropTypes from 'prop-types'
+import { useId } from 'react'
 
-const RadioItem = ({ choice, index, setSelectedChoice }) => {
+const RadioItem = ({ choice, setSelectedChoice }) => {
+  const radioId = useId()
   return (
     <div>
       <label
-        htmlFor={`choice-${index}`}
-        className="block flex w-full max-w-xs rounded-md p-3 text-sm"
+        htmlFor={radioId}
+        className="flex w-full max-w-xs rounded-md p-3 text-sm"
       >
         <input
           type="radio"
           name="hs-vertical-radio-in-form"
           className="pointer-events-none mt-0.5 shrink-0 rounded-full border-gray-200 text-blue-600"
-          id={`choice-${index}`}
+          id={radioId}
           value={choice}
           onChange={e => setSelectedChoice(e.target.value)}
         />
@@ -25,7 +27,6 @@ const RadioItem = ({ choice, index, setSelectedChoice }) => {
 
 RadioItem.propTypes = {
   choice: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
   setSelectedChoice: PropTypes.func.isRequired,
 }
 
