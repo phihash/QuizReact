@@ -11,6 +11,7 @@ function App() {
   const [quizzes, setQuizzes] = useState([])
   const [score, setScore] = useState(0)
   const [isQuizStarted, setIsQuizStarted] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   // const [isQuizFinished , setIsQuizFinished] = useState(false)
   // const [isReviewMode   , setIsReviewMode] = useState(false)
   useEffect(() => {
@@ -18,6 +19,7 @@ function App() {
       if (isQuizStarted) {
         const quizList = await fetchQuizzes()
         setQuizzes(quizList)
+        setIsLoading(false)
       }
     }
 
@@ -26,6 +28,7 @@ function App() {
 
   const startQuiz = () => {
     setIsQuizStarted(true)
+    setIsLoading(true)
   }
 
   const incrementTotalQuestions = () => {
@@ -109,14 +112,21 @@ function App() {
             </>
           )}
 
-          {isQuizStarted &&
-            (quizzes.length ? (
-              <RunningQuiz quizzes={quizzes} />
-            ) : (
+          {isQuizStarted ? (
+            isLoading ? (
               <p className="text-2xl font-semibold text-gray-700">
                 Loading....
               </p>
-            ))}
+            ) : quizzes.length ? (
+              <RunningQuiz quizzes={quizzes} />
+            ) : (
+              <p className="text-2xl font-semibold text-gray-700">
+                クイズが登録されていません
+              </p>
+            )
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>
