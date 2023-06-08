@@ -8,27 +8,27 @@ const sharedButtonStyle =
 
 function App() {
   const [totalQuestions, setTotalQuestions] = useState(5) //ユーザーが解く問題の数を格納する
- 
-
-
   const [quizzes, setQuizzes] = useState([])
   const [score, setScore] = useState(0)
-const [isQuizStarted, setIsQuizStarted] = useState(false)
-  // const [isQuizFinished , setIsQuizFinished] = useState(false)
+  const [isQuizStarted, setIsQuizStarted] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  // const [isQuizFinished, setIsQuizFinished] = useState(false)
   // const [isReviewMode   , setIsReviewMode] = useState(false)
   useEffect(() => {
+    setIsLoading(true)
     const fetchData = async () => {
-      fetchQuizzes()
+      if (isQuizStarted) {
+        const quizList = await fetchQuizzes()
+        setQuizzes(quizList)
+        setIsLoading(false)
+      }
     }
 
     fetchData()
-  }, [])
-const startQuiz = () => {
-    setIsQuizStarted(true)
-  }
+  }, [isQuizStarted])
 
-  const quitQuiz = () => {
-    setIsQuizStarted(false)
+  const startQuiz = () => {
+    setIsQuizStarted(true)
   }
 
   const incrementTotalQuestions = () => {
@@ -53,13 +53,12 @@ const startQuiz = () => {
     }
   }
 
-
   return (
     <div className="min-h-screen bg-amber-600">
       <div className="mx-auto max-w-screen-xl px-4 pb-48 pt-12 md:px-8">
         <div className="flex flex-col items-center rounded-lg bg-gray-100 p-4 sm:p-8">
           <div className="mb-4 sm:mb-8">
-            <h2 className="text-center text-2xl font-bold text-gray-600 sm:text-3xl lg:text-4xl">
+            <h2 className="mt-6 text-center text-4xl font-bold text-gray-600">
               React Quiz
             </h2>
             <p className="mt-2 text-center font-semibold text-gray-500">
@@ -113,7 +112,21 @@ const startQuiz = () => {
             </>
           )}
 
-          {isQuizStarted && <RunningQuiz quitQuiz={quitQuiz}></RunningQuiz>}
+          {isQuizStarted ? (
+            isLoading ? (
+              <p className="text-2xl font-semibold text-gray-700">
+                Loading....
+              </p>
+            ) : quizzes.length ? (
+              <RunningQuiz quizzes={quizzes} />
+            ) : (
+              <p className="text-2xl font-semibold text-gray-700">
+                クイズが登録されていません
+              </p>
+            )
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>
