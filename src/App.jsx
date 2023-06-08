@@ -12,9 +12,10 @@ function App() {
   const [score, setScore] = useState(0)
   const [isQuizStarted, setIsQuizStarted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  // const [isQuizFinished , setIsQuizFinished] = useState(false)
+  // const [isQuizFinished, setIsQuizFinished] = useState(false)
   // const [isReviewMode   , setIsReviewMode] = useState(false)
   useEffect(() => {
+    setIsLoading(true)
     const fetchData = async () => {
       if (isQuizStarted) {
         const quizList = await fetchQuizzes()
@@ -28,7 +29,6 @@ function App() {
 
   const startQuiz = () => {
     setIsQuizStarted(true)
-    setIsLoading(true)
   }
 
   const incrementTotalQuestions = () => {
