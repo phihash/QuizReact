@@ -12,7 +12,8 @@ function App() {
   const [score, setScore] = useState(0)
   const [isQuizStarted, setIsQuizStarted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  // const [isQuizFinished, setIsQuizFinished] = useState(false)
+  const [isQuizFinished, setIsQuizFinished] = useState(false)
+
   // const [isReviewMode   , setIsReviewMode] = useState(false)
   useEffect(() => {
     setIsLoading(true)
@@ -66,7 +67,7 @@ function App() {
             </p>
           </div>
 
-          {!isQuizStarted && (
+          {!isQuizStarted && !isQuizFinished && (
             <>
               <div className="mb-3 flex w-full max-w-md items-center justify-center gap-6">
                 <div className="custom-number-input flex h-10 w-40 sm:w-40">
@@ -118,7 +119,13 @@ function App() {
                 Loading....
               </p>
             ) : quizzes.length ? (
-              <RunningQuiz quizzes={quizzes} />
+              <RunningQuiz
+                quizzes={quizzes}
+                score={score}
+                setScore={setScore}
+                setIsQuizFinished={setIsQuizFinished}
+                setIsQuizStarted={setIsQuizStarted}
+              />
             ) : (
               <p className="text-2xl font-semibold text-gray-700">
                 クイズが登録されていません
@@ -127,6 +134,8 @@ function App() {
           ) : (
             <></>
           )}
+
+          {isQuizFinished && <p>クイズ終了画面</p>}
         </div>
       </div>
     </div>
