@@ -18,14 +18,14 @@ function App() {
     setIsLoading(true)
     const fetchData = async () => {
       if (isQuizStarted) {
-        const quizList = await fetchQuizzes()
+        const quizList = await fetchQuizzes(totalQuestions)
         setQuizzes(quizList)
         setIsLoading(false)
       }
     }
 
     fetchData()
-  }, [isQuizStarted])
+  }, [isQuizStarted, totalQuestions])
 
   const startQuiz = () => {
     setIsQuizStarted(true)
