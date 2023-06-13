@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import RunningQuiz from './RunningQuiz'
+import Review from './Review'
 import './App.css'
 import { fetchQuizzes } from './fetchQuizzes'
 
@@ -13,6 +14,7 @@ function App() {
   const [isQuizStarted, setIsQuizStarted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isQuizFinished, setIsQuizFinished] = useState(false)
+  const [wrongQuizzes, setWrongQuizzes] = useState([])
 
   // const [isReviewMode   , setIsReviewMode] = useState(false)
   useEffect(() => {
@@ -71,7 +73,7 @@ function App() {
             <>
               <div className="mb-3 flex w-full max-w-md items-center justify-center gap-6">
                 <div className="custom-number-input flex h-10 w-40 sm:w-40">
-                  <div className="relative  flex h-10 w-full flex-row rounded-lg bg-transparent">
+                  <div className="relative flex h-10 w-full flex-row rounded-lg bg-transparent">
                     <button
                       className={`${sharedButtonStyle} rounded-l`}
                       onClick={decrementTotalQuestions}
@@ -122,9 +124,11 @@ function App() {
               <RunningQuiz
                 quizzes={quizzes}
                 score={score}
+                wrongQuizzes={wrongQuizzes}
                 setScore={setScore}
                 setIsQuizFinished={setIsQuizFinished}
                 setIsQuizStarted={setIsQuizStarted}
+                setWrongQuizzes={setWrongQuizzes}
               />
             ) : (
               <p className="text-2xl font-semibold text-gray-700">
@@ -135,7 +139,9 @@ function App() {
             <></>
           )}
 
-          {isQuizFinished && <p>クイズ終了画面</p>}
+          {isQuizFinished && (
+            <Review wrongQuizzes={wrongQuizzes}>クイズ終了画面</Review>
+          )}
         </div>
       </div>
     </div>

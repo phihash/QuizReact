@@ -4,13 +4,15 @@ import RadioItem from './RadioItem'
 const RunningQuiz = ({
   quizzes,
   score,
+  wrongQuizzes,
   setScore,
   setIsQuizFinished,
   setIsQuizStarted,
+  setWrongQuizzes,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [selectedChoice, setSelectedChoice] = useState(null)
-  const [wrongQuizzes, setWrongQuizzes] = useState([])
+  // const [wrongQuizzes, setWrongQuizzes] = useState([])
 
   const checkAnswer = () => {
     if (selectedChoice == quizzes[currentIndex].answer) {
@@ -63,9 +65,11 @@ const RunningQuiz = ({
 RunningQuiz.propTypes = {
   quizzes: PropTypes.array.isRequired,
   score: PropTypes.number.isRequired,
+  wrongQuizzes: PropTypes.array.isRequired,
   setScore: PropTypes.func.isRequired,
   setIsQuizFinished: PropTypes.func.isRequired,
   setIsQuizStarted: PropTypes.func.isRequired,
+  setWrongQuizzes: PropTypes.func.isRequired,
 }
 
 export default RunningQuiz
