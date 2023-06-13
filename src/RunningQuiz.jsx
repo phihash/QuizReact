@@ -6,7 +6,6 @@ const RunningQuiz = ({
   score,
   wrongQuizzes,
   setScore,
-  setIsQuizFinished,
   setIsQuizStarted,
   setWrongQuizzes,
 }) => {
@@ -15,7 +14,7 @@ const RunningQuiz = ({
   // const [wrongQuizzes, setWrongQuizzes] = useState([])
 
   const checkAnswer = () => {
-    if (selectedChoice == quizzes[currentIndex].answer) {
+    if (selectedChoice === quizzes[currentIndex].answer) {
       setScore(score + 1)
     } else {
       setWrongQuizzes([...wrongQuizzes, quizzes[currentIndex]])
@@ -29,7 +28,6 @@ const RunningQuiz = ({
       setCurrentIndex(currentIndex + 1)
       setSelectedChoice(null)
     } else {
-      setIsQuizFinished(true)
       setIsQuizStarted(false)
     }
   }
@@ -67,7 +65,6 @@ RunningQuiz.propTypes = {
   score: PropTypes.number.isRequired,
   wrongQuizzes: PropTypes.array.isRequired,
   setScore: PropTypes.func.isRequired,
-  setIsQuizFinished: PropTypes.func.isRequired,
   setIsQuizStarted: PropTypes.func.isRequired,
   setWrongQuizzes: PropTypes.func.isRequired,
 }

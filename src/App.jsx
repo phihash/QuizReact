@@ -1,6 +1,6 @@
+import React from 'react'
 import { useState, useEffect } from 'react'
 import RunningQuiz from './RunningQuiz'
-import Review from './Review'
 import './App.css'
 import { fetchQuizzes } from './fetchQuizzes'
 
@@ -13,10 +13,7 @@ function App() {
   const [score, setScore] = useState(0)
   const [isQuizStarted, setIsQuizStarted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [isQuizFinished, setIsQuizFinished] = useState(false)
   const [wrongQuizzes, setWrongQuizzes] = useState([])
-
-  // const [isReviewMode   , setIsReviewMode] = useState(false)
   useEffect(() => {
     setIsLoading(true)
     const fetchData = async () => {
@@ -60,16 +57,11 @@ function App() {
     <div className="min-h-screen bg-amber-600">
       <div className="mx-auto max-w-screen-xl px-4 pb-48 pt-12 md:px-8">
         <div className="flex flex-col items-center rounded-lg bg-gray-100 p-4 sm:p-8">
-          <div className="mb-4 sm:mb-8">
-            <h2 className="mt-6 text-center text-4xl font-bold text-gray-600">
-              React Quiz
-            </h2>
-            <p className="mt-2 text-center font-semibold text-gray-500">
-              {score}点
-            </p>
-          </div>
+          <h2 className="mb-4 mt-6 text-center text-4xl font-bold text-gray-600 sm:mb-8">
+            React Quiz
+          </h2>
 
-          {!isQuizStarted && !isQuizFinished && (
+          {!isQuizStarted && (
             <>
               <div className="mb-3 flex w-full max-w-md items-center justify-center gap-6">
                 <div className="custom-number-input flex h-10 w-40 sm:w-40">
@@ -126,7 +118,6 @@ function App() {
                 score={score}
                 wrongQuizzes={wrongQuizzes}
                 setScore={setScore}
-                setIsQuizFinished={setIsQuizFinished}
                 setIsQuizStarted={setIsQuizStarted}
                 setWrongQuizzes={setWrongQuizzes}
               />
@@ -136,11 +127,26 @@ function App() {
               </p>
             )
           ) : (
-            <></>
-          )}
-
-          {isQuizFinished && (
-            <Review wrongQuizzes={wrongQuizzes}>クイズ終了画面</Review>
+            <>
+              {!isQuizStarted && (
+                <>
+                  <p className="my-6 text-center font-semibold text-gray-500">
+                    {score}点
+                  </p>
+                  {wrongQuizzes.map((wrongQuiz, index) => {
+                    return (
+                      <React.Fragment key={index}>
+                        <div className="">
+                          <h1 className="">Q.{wrongQuiz.question}</h1>
+                          <h2 className="">A. {wrongQuiz.answer}</h2>
+                          <p className="">{wrongQuiz.explanation}</p>
+                        </div>
+                      </React.Fragment>
+                    )
+                  })}
+                </>
+              )}
+            </>
           )}
         </div>
       </div>
