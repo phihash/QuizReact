@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect } from 'react'
 import RunningQuiz from './RunningQuiz'
 import './App.css'
@@ -56,96 +55,99 @@ function App() {
   return (
     <div className="min-h-screen bg-amber-600">
       <div className="mx-auto max-w-screen-xl px-4 pb-48 pt-12 md:px-8">
-        <div className="flex flex-col items-center rounded-lg bg-gray-100 p-4 sm:p-8">
-          <h2 className="mb-4 mt-6 text-center text-4xl font-bold text-gray-600 sm:mb-8">
-            React Quiz
-          </h2>
+        <div className="rounded-lg bg-gray-100 p-4 sm:p-8">
+          <div className="flex flex-col items-center ">
+            <h2 className="my-6 text-center text-4xl font-bold text-gray-600 sm:mb-8">
+              React Quiz
+            </h2>
 
+            {!isQuizStarted && (
+              <>
+                <div className="mb-3 flex w-full max-w-md items-center justify-center gap-6">
+                  <div className="custom-number-input flex h-10 w-40 sm:w-40">
+                    <div className="relative flex h-10 w-full flex-row rounded-lg bg-transparent">
+                      <button
+                        className={`${sharedButtonStyle} rounded-l`}
+                        onClick={decrementTotalQuestions}
+                      >
+                        <span className="m-auto text-lg font-bold sm:text-2xl">
+                          -
+                        </span>
+                      </button>
+                      <input
+                        type="number"
+                        className="sm:text-md w-full  bg-gray-300 text-center text-lg font-semibold text-gray-700 outline-none hover:text-black focus:text-black focus:outline-none md:text-base"
+                        name="custom-input-number"
+                        value={totalQuestions}
+                        min="1"
+                        max="100"
+                        onChange={changeTotalQuestions}
+                      />
+                      <button
+                        className={`${sharedButtonStyle} rounded-r`}
+                        onClick={incrementTotalQuestions}
+                      >
+                        <span className="m-auto text-lg font-semibold sm:text-2xl">
+                          +
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={startQuiz}
+                    className="items-center rounded border-b-4 border-amber-600 bg-amber-500 px-8 py-2 font-bold text-white hover:border-amber-500 hover:bg-amber-400"
+                  >
+                    Start
+                  </button>
+                </div>
+                <p className="text-center text-sm font-semibold text-gray-500">
+                  問題数(1-100)を選択してください
+                </p>
+              </>
+            )}
+
+            {isQuizStarted ? (
+              isLoading ? (
+                <p className="text-2xl font-semibold text-gray-700">
+                  Loading....
+                </p>
+              ) : quizzes.length ? (
+                <RunningQuiz
+                  quizzes={quizzes}
+                  score={score}
+                  wrongQuizzes={wrongQuizzes}
+                  setScore={setScore}
+                  setIsQuizStarted={setIsQuizStarted}
+                  setWrongQuizzes={setWrongQuizzes}
+                />
+              ) : (
+                <p className="text-2xl font-semibold text-gray-700">
+                  クイズが登録されていません
+                </p>
+              )
+            ) : (
+              <></>
+            )}
+          </div>
           {!isQuizStarted && (
             <>
-              <div className="mb-3 flex w-full max-w-md items-center justify-center gap-6">
-                <div className="custom-number-input flex h-10 w-40 sm:w-40">
-                  <div className="relative flex h-10 w-full flex-row rounded-lg bg-transparent">
-                    <button
-                      className={`${sharedButtonStyle} rounded-l`}
-                      onClick={decrementTotalQuestions}
-                    >
-                      <span className="m-auto text-lg font-bold sm:text-2xl">
-                        -
-                      </span>
-                    </button>
-                    <input
-                      type="number"
-                      className="sm:text-md w-full  bg-gray-300 text-center text-lg font-semibold text-gray-700 outline-none hover:text-black focus:text-black focus:outline-none md:text-base"
-                      name="custom-input-number"
-                      value={totalQuestions}
-                      min="1"
-                      max="100"
-                      onChange={changeTotalQuestions}
-                    />
-                    <button
-                      className={`${sharedButtonStyle} rounded-r`}
-                      onClick={incrementTotalQuestions}
-                    >
-                      <span className="m-auto text-lg font-semibold sm:text-2xl">
-                        +
-                      </span>
-                    </button>
+              <p className="my-6 text-center font-semibold text-gray-500">
+                {score}点
+              </p>
+              {wrongQuizzes.map((wrongQuiz, index) => {
+                return (
+                  <div key={index} className="px-8">
+                    <h1 className="mb-3 text-base font-semibold md:text-2xl">
+                      Q.{wrongQuiz.question}
+                    </h1>
+                    <h2 className="mb-3 text-xl font-semibold">
+                      A. {wrongQuiz.answer}
+                    </h2>
+                    <p className="mb-8">{wrongQuiz.explanation}</p>
                   </div>
-                </div>
-
-                <button
-                  onClick={startQuiz}
-                  className="items-center rounded border-b-4 border-amber-600 bg-amber-500 px-8 py-2 font-bold text-white hover:border-amber-500 hover:bg-amber-400"
-                >
-                  Start
-                </button>
-              </div>
-              <p className="text-center text-sm font-semibold text-gray-500">
-                問題数(1-100)を選択してください
-              </p>
-            </>
-          )}
-
-          {isQuizStarted ? (
-            isLoading ? (
-              <p className="text-2xl font-semibold text-gray-700">
-                Loading....
-              </p>
-            ) : quizzes.length ? (
-              <RunningQuiz
-                quizzes={quizzes}
-                score={score}
-                wrongQuizzes={wrongQuizzes}
-                setScore={setScore}
-                setIsQuizStarted={setIsQuizStarted}
-                setWrongQuizzes={setWrongQuizzes}
-              />
-            ) : (
-              <p className="text-2xl font-semibold text-gray-700">
-                クイズが登録されていません
-              </p>
-            )
-          ) : (
-            <>
-              {!isQuizStarted && (
-                <>
-                  <p className="my-6 text-center font-semibold text-gray-500">
-                    {score}点
-                  </p>
-                  {wrongQuizzes.map((wrongQuiz, index) => {
-                    return (
-                      <React.Fragment key={index}>
-                        <div className="">
-                          <h1 className="">Q.{wrongQuiz.question}</h1>
-                          <h2 className="">A. {wrongQuiz.answer}</h2>
-                          <p className="">{wrongQuiz.explanation}</p>
-                        </div>
-                      </React.Fragment>
-                    )
-                  })}
-                </>
-              )}
+                )
+              })}
             </>
           )}
         </div>
