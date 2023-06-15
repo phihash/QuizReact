@@ -138,13 +138,15 @@ function App() {
               {wrongQuizzes.map((wrongQuiz, index) => {
                 return (
                   <div key={index} className="px-8">
-                    <h1 className="mb-3 text-base font-semibold md:text-2xl">
+                    <h1 className="mb-3 text-lg font-semibold md:text-2xl">
                       Q.{wrongQuiz.question}
                     </h1>
-                    <h2 className="mb-3 text-xl font-semibold">
+                    <h2 className="mb-3 text-base font-semibold md:text-xl">
                       A. {wrongQuiz.answer}
                     </h2>
-                    <p className="mb-8">{wrongQuiz.explanation}</p>
+                    <p className="mb-8 text-sm md:text-lg">
+                      {wrongQuiz.explanation}
+                    </p>
                   </div>
                 )
               })}
