@@ -26,6 +26,7 @@ function App() {
     fetchData()
   }, [quizState])
 
+
   const startQuiz = () => {
     setQuizState('クイズ中')
   }
