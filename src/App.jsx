@@ -10,13 +10,13 @@ function App() {
   const [totalQuestions, setTotalQuestions] = useState(5) //ユーザーが解く問題の数を格納する
   const [quizzes, setQuizzes] = useState([])
   const [score, setScore] = useState(0)
-  const [isQuizStarted, setIsQuizStarted] = useState(false)
+  const [quizState, setQuizState] = useState('クイズ前')
   const [isLoading, setIsLoading] = useState(false)
   const [wrongQuizzes, setWrongQuizzes] = useState([])
   useEffect(() => {
     setIsLoading(true)
     const fetchData = async () => {
-      if (isQuizStarted) {
+      if (quizState === 'クイズ中') {
         const quizList = await fetchQuizzes()
         setQuizzes(quizList)
         setIsLoading(false)
@@ -24,10 +24,10 @@ function App() {
     }
 
     fetchData()
-  }, [isQuizStarted])
+  }, [quizState])
 
   const startQuiz = () => {
-    setIsQuizStarted(true)
+    setQuizState('クイズ中')
   }
 
   const incrementTotalQuestions = () => {
@@ -61,7 +61,7 @@ function App() {
               React Quiz
             </h2>
 
-            {!isQuizStarted && (
+            {quizState === 'クイズ前' && (
               <>
                 <div className="mb-3 flex w-full max-w-md items-center justify-center gap-6">
                   <div className="custom-number-input flex h-10 w-40 sm:w-40">
@@ -107,7 +107,7 @@ function App() {
               </>
             )}
 
-            {isQuizStarted ? (
+            {quizState === 'クイズ中' ? (
               isLoading ? (
                 <p className="text-2xl font-semibold text-gray-700">
                   Loading....
@@ -118,7 +118,7 @@ function App() {
                   score={score}
                   wrongQuizzes={wrongQuizzes}
                   setScore={setScore}
-                  setIsQuizStarted={setIsQuizStarted}
+                  setQuizState={setQuizState}
                   setWrongQuizzes={setWrongQuizzes}
                 />
               ) : (
@@ -130,15 +130,15 @@ function App() {
               <></>
             )}
           </div>
-          {!isQuizStarted && (
+          {quizState === 'クイズ終了' && (
             <>
-              <p className="my-6 text-center font-semibold text-gray-500">
-                {score}点
+              <p className="my-12 text-center text-xl font-semibold font-semibold text-gray-800 md:text-2xl">
+                あなたは {totalQuestions}点中 {score}点 でした！
               </p>
               {wrongQuizzes.map((wrongQuiz, index) => {
                 return (
                   <div key={index} className="px-8">
-                    <h1 className="mb-3 text-lg font-semibold md:text-2xl">
+                    <h1 className="mb-3 text-xl font-semibold md:text-2xl">
                       Q.{wrongQuiz.question}
                     </h1>
                     <h2 className="mb-3 text-base font-semibold md:text-xl">

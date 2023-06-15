@@ -6,12 +6,11 @@ const RunningQuiz = ({
   score,
   wrongQuizzes,
   setScore,
-  setIsQuizStarted,
+  setQuizState,
   setWrongQuizzes,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [selectedChoice, setSelectedChoice] = useState(null)
-  // const [wrongQuizzes, setWrongQuizzes] = useState([])
 
   const checkAnswer = () => {
     if (selectedChoice === quizzes[currentIndex].answer) {
@@ -22,13 +21,12 @@ const RunningQuiz = ({
   }
 
   const handleNext = () => {
-    // 最後の問題に達していないか確認します
     checkAnswer()
     if (currentIndex < quizzes.length - 1) {
       setCurrentIndex(currentIndex + 1)
       setSelectedChoice(null)
     } else {
-      setIsQuizStarted(false)
+      setQuizState('クイズ終了')
     }
   }
   return (
@@ -65,7 +63,7 @@ RunningQuiz.propTypes = {
   score: PropTypes.number.isRequired,
   wrongQuizzes: PropTypes.array.isRequired,
   setScore: PropTypes.func.isRequired,
-  setIsQuizStarted: PropTypes.func.isRequired,
+  setQuizState: PropTypes.func.isRequired,
   setWrongQuizzes: PropTypes.func.isRequired,
 }
 
