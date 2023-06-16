@@ -10,13 +10,13 @@ function App() {
   const [totalQuestions, setTotalQuestions] = useState(5) //ユーザーが解く問題の数を格納する
   const [quizzes, setQuizzes] = useState([])
   const [score, setScore] = useState(0)
-  const [quizState, setQuizState] = useState('クイズ前')
+  const [quizState, setQuizState] = useState('beforeTheQuiz')
   const [isLoading, setIsLoading] = useState(false)
   const [wrongQuizzes, setWrongQuizzes] = useState([])
   useEffect(() => {
     setIsLoading(true)
     const fetchData = async () => {
-      if (quizState === 'クイズ中') {
+      if (quizState === 'InProgress') {
         const quizList = await fetchQuizzes()
         setQuizzes(quizList)
         setIsLoading(false)
@@ -28,7 +28,7 @@ function App() {
 
 
   const startQuiz = () => {
-    setQuizState('クイズ中')
+    setQuizState('InProgress')
   }
 
   const incrementTotalQuestions = () => {
@@ -62,7 +62,7 @@ function App() {
               React Quiz
             </h2>
 
-            {quizState === 'クイズ前' && (
+            {quizState === 'beforeTheQuiz' && (
               <>
                 <div className="mb-3 flex w-full max-w-md items-center justify-center gap-6">
                   <div className="custom-number-input flex h-10 w-40 sm:w-40">
@@ -108,7 +108,7 @@ function App() {
               </>
             )}
 
-            {quizState === 'クイズ中' ? (
+            {quizState === 'InProgress' ? (
               isLoading ? (
                 <p className="text-2xl font-semibold text-gray-700">
                   Loading....
@@ -131,7 +131,7 @@ function App() {
               <></>
             )}
           </div>
-          {quizState === 'クイズ終了' && (
+          {quizState === 'finished' && (
             <>
               <p className="my-12 text-center text-xl font-semibold font-semibold text-gray-800 md:text-2xl">
                 あなたは {totalQuestions}点中 {score}点 でした！
