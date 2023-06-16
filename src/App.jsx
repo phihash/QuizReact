@@ -17,7 +17,7 @@ function App() {
     setIsLoading(true)
     const fetchData = async () => {
       if (quizState === 'InProgress') {
-        const quizList = await fetchQuizzes()
+        const quizList = await fetchQuizzes(totalQuestions)
         setQuizzes(quizList)
         setIsLoading(false)
       }

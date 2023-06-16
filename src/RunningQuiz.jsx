@@ -26,7 +26,7 @@ const RunningQuiz = ({
       setCurrentIndex(currentIndex + 1)
       setSelectedChoice(null)
     } else {
-      setQuizState('クイズ終了')
+      setQuizState('finished')
     }
   }
   return (
