@@ -1,16 +1,32 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import RadioItem from './RadioItem'
-const RunningQuiz = ({ quizzes }) => {
+const RunningQuiz = ({
+  quizzes,
+  score,
+  wrongQuizzes,
+  setScore,
+  setQuizState,
+  setWrongQuizzes,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [selectedChoice, setSelectedChoice] = useState(null)
+
+  const checkAnswer = () => {
+    if (selectedChoice === quizzes[currentIndex].answer) {
+      setScore(score + 1)
+    } else {
+      setWrongQuizzes([...wrongQuizzes, quizzes[currentIndex]])
+    }
+  }
+
   const handleNext = () => {
-    // 最後の問題に達していないか確認します
+    checkAnswer()
     if (currentIndex < quizzes.length - 1) {
       setCurrentIndex(currentIndex + 1)
       setSelectedChoice(null)
     } else {
-      console.log('Quiz Finished!')
+      setQuizState('クイズ終了')
     }
   }
   return (
@@ -44,6 +60,11 @@ const RunningQuiz = ({ quizzes }) => {
 
 RunningQuiz.propTypes = {
   quizzes: PropTypes.array.isRequired,
+  score: PropTypes.number.isRequired,
+  wrongQuizzes: PropTypes.array.isRequired,
+  setScore: PropTypes.func.isRequired,
+  setQuizState: PropTypes.func.isRequired,
+  setWrongQuizzes: PropTypes.func.isRequired,
 }
 
 export default RunningQuiz
