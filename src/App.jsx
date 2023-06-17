@@ -56,7 +56,7 @@ function App() {
     <div className="min-h-screen bg-amber-600">
       <div className="mx-auto max-w-screen-xl px-4 pb-48 pt-12 md:px-8">
         <div className="rounded-lg bg-gray-100 p-4 sm:p-8">
-          <div className="flex flex-col items-center ">
+          <div className="flex flex-col items-center">
             <h2 className="my-6 text-center text-4xl font-bold text-gray-600 sm:mb-8">
               React Quiz
             </h2>
@@ -150,6 +150,14 @@ function App() {
                   </div>
                 )
               })}
+              <div className="flex justify-center">
+                <button
+                  onClick={() => window.location.reload()}
+                  className="my-12 rounded border-b-4 border-teal-600 bg-teal-500 px-8 py-2 font-bold text-white hover:border-teal-500 hover:bg-teal-400 disabled:border-blue-200 disabled:bg-blue-200"
+                >
+                  Retry
+                </button>
+              </div>
             </>
           )}
         </div>
