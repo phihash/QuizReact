@@ -24,7 +24,7 @@ function App() {
     }
 
     fetchData()
-  }, [quizState])
+  }, [quizState, totalQuestions])
 
   const startQuiz = () => {
     setQuizState('InProgress')
