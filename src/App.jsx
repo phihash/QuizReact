@@ -52,6 +52,12 @@ function App() {
     }
   }
 
+  const retryQuiz = () => {
+    setQuizState('beforeTheQuiz')
+    setWrongQuizzes([])
+    setScore(0)
+  }
+
   return (
     <div className="min-h-screen bg-amber-600">
       <div className="mx-auto max-w-screen-xl px-4 pb-48 pt-12 md:px-8">
@@ -152,7 +158,7 @@ function App() {
               })}
               <div className="flex justify-center">
                 <button
-                  onClick={() => window.location.reload()}
+                  onClick={retryQuiz}
                   className="my-12 rounded border-b-4 border-teal-600 bg-teal-500 px-8 py-2 font-bold text-white hover:border-teal-500 hover:bg-teal-400 disabled:border-blue-200 disabled:bg-blue-200"
                 >
                   Retry
