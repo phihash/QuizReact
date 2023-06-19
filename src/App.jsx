@@ -54,6 +54,7 @@ function App() {
 
   const retryQuiz = () => {
     setQuizState('beforeTheQuiz')
+    setQuizzes([])
     setWrongQuizzes([])
     setScore(0)
   }
