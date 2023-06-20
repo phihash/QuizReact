@@ -50,7 +50,7 @@ const RunningQuiz = ({
       <button
         onClick={handleNext}
         disabled={!selectedChoice}
-        className="mb-12 items-center rounded border-b-4 border-blue-600 bg-blue-500 px-8 py-2 font-bold text-white hover:border-blue-500 hover:bg-blue-400 disabled:border-blue-200 disabled:bg-blue-200"
+        className=" mb-12 items-center rounded border-b-4 border-blue-600 bg-blue-500 px-8 py-2 font-bold text-white hover:border-blue-500 hover:bg-blue-400 disabled:border-blue-200 disabled:bg-blue-200"
       >
         Next
       </button>
