@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import RadioItem from './RadioItem'
+import CheckBoxItem from './CheckBoxItem'
 const RunningQuiz = ({
   quizzes,
   score,
@@ -35,18 +36,33 @@ const RunningQuiz = ({
         {quizzes[currentIndex].question}
       </p>
 
-      <div className="my-8 grid space-y-2">
-        {quizzes[currentIndex].choices.map((choice, index) => {
-          return (
-            <RadioItem
-              key={choice}
-              index={index}
-              choice={choice}
-              setSelectedChoice={setSelectedChoice}
-            ></RadioItem>
-          )
-        })}
-      </div>
+      {quizzes[currentIndex].isMultipleAnswer ? (
+        <div className="my-8 grid space-y-2">
+          {quizzes[currentIndex].choices.map(choice => {
+            return (
+              <CheckBoxItem
+                key={choice}
+                choice={choice}
+                setSelectedChoice={setSelectedChoice}
+              ></CheckBoxItem>
+            )
+          })}
+        </div>
+      ) : (
+        <div className="my-8 grid space-y-2">
+          {quizzes[currentIndex].choices.map((choice, index) => {
+            return (
+              <RadioItem
+                key={choice}
+                index={index}
+                choice={choice}
+                setSelectedChoice={setSelectedChoice}
+              ></RadioItem>
+            )
+          })}
+        </div>
+      )}
+
       <button
         onClick={handleNext}
         disabled={!selectedChoice}
