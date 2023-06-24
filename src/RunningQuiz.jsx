@@ -12,12 +12,33 @@ const RunningQuiz = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [selectedChoice, setSelectedChoice] = useState(null)
+  const [selectedCheckBox, setSelectedCheckBox] = useState([])
+
+  const checkMultipleAnswer = (a, b) => {
+    if (a.length !== b.length) return false
+
+    for (let i = 0; i < a.length; i++) {
+      if (a[i] !== b[i]) return false
+    }
+
+    return true
+  }
 
   const checkAnswer = () => {
-    if (selectedChoice === quizzes[currentIndex].answer) {
-      setScore(score + 1)
+    if (quizzes[currentIndex].isMultipleAnswer) {
+      //checkbox
+      if (checkMultipleAnswer(selectedCheckBox, quizzes[currentIndex].answer)) {
+        setScore(score + 1)
+      } else {
+        setWrongQuizzes([...wrongQuizzes, quizzes[currentIndex]])
+      }
     } else {
-      setWrongQuizzes([...wrongQuizzes, quizzes[currentIndex]])
+      if (selectedChoice === quizzes[currentIndex].answer) {
+        //radio
+        setScore(score + 1)
+      } else {
+        setWrongQuizzes([...wrongQuizzes, quizzes[currentIndex]])
+      }
     }
   }
 
@@ -26,6 +47,7 @@ const RunningQuiz = ({
     if (currentIndex < quizzes.length - 1) {
       setCurrentIndex(currentIndex + 1)
       setSelectedChoice(null)
+      setSelectedCheckBox([])
     } else {
       setQuizState('finished')
     }
@@ -43,7 +65,8 @@ const RunningQuiz = ({
               <CheckBoxItem
                 key={choice}
                 choice={choice}
-                setSelectedChoice={setSelectedChoice}
+                selectedCheckBox={selectedCheckBox}
+                setSelectedCheckBox={setSelectedCheckBox}
               ></CheckBoxItem>
             )
           })}
@@ -65,7 +88,11 @@ const RunningQuiz = ({
 
       <button
         onClick={handleNext}
-        disabled={!selectedChoice}
+        disabled={
+          !quizzes[currentIndex].isMultipleAnswer
+            ? !selectedChoice
+            : selectedCheckBox.length === 0
+        }
         className=" mb-12 items-center rounded border-b-4 border-blue-600 bg-blue-500 px-8 py-2 font-bold text-white hover:border-blue-500 hover:bg-blue-400 disabled:border-blue-200 disabled:bg-blue-200"
       >
         Next

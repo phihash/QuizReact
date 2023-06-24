@@ -1,8 +1,15 @@
 import PropTypes from 'prop-types'
 import { useId } from 'react'
 
-const CheckBoxItem = ({ choice, setSelectedChoice }) => {
+const CheckBoxItem = ({ choice, selectedCheckBox, setSelectedCheckBox }) => {
   const checkId = useId()
+  const handleCheckChange = e => {
+    if (e.target.checked) {
+      setSelectedCheckBox([...selectedCheckBox, choice])
+    } else {
+      setSelectedCheckBox(selectedCheckBox.filter(item => item !== choice))
+    }
+  }
   return (
     <>
       <div>
@@ -14,7 +21,8 @@ const CheckBoxItem = ({ choice, setSelectedChoice }) => {
             type="checkbox"
             value={choice}
             id={checkId}
-            onChange={e => setSelectedChoice(e.target.value)}
+            checked={selectedCheckBox.includes(choice)}
+            onChange={handleCheckChange}
             name="bordered-checkbox"
             className="mt-0.5 shrink-0 rounded-full border-gray-200 text-blue-600"
           />
@@ -29,7 +37,8 @@ const CheckBoxItem = ({ choice, setSelectedChoice }) => {
 
 CheckBoxItem.propTypes = {
   choice: PropTypes.string.isRequired,
-  setSelectedChoice: PropTypes.func.isRequired,
+  selectedCheckBox: PropTypes.array.isRequired,
+  setSelectedCheckBox: PropTypes.func.isRequired,
 }
 
 export default CheckBoxItem
