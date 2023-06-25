@@ -67,7 +67,7 @@ const RunningQuiz = ({
                 choice={choice}
                 selectedCheckBox={selectedCheckBox}
                 setSelectedCheckBox={setSelectedCheckBox}
-              ></CheckBoxItem>
+              />
             )
           })}
         </div>
@@ -80,7 +80,7 @@ const RunningQuiz = ({
                 index={index}
                 choice={choice}
                 setSelectedChoice={setSelectedChoice}
-              ></RadioItem>
+              />
             )
           })}
         </div>

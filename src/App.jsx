@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import RunningQuiz from './RunningQuiz'
 import './App.css'
 import { fetchQuizzes } from './fetchQuizzes'
+import ShareButton from './ShareButton'
 
 const sharedButtonStyle =
   'h-full w-32 cursor-pointer bg-gray-300 text-gray-600 outline-none hover:bg-gray-400 hover:text-gray-700'
@@ -157,13 +158,14 @@ function App() {
                   </div>
                 )
               })}
-              <div className="flex justify-center">
+              <div className="flex justify-center gap-3">
                 <button
                   onClick={retryQuiz}
                   className="my-12 rounded border-b-4 border-teal-600 bg-teal-500 px-8 py-2 font-bold text-white hover:border-teal-500 hover:bg-teal-400 disabled:border-blue-200 disabled:bg-blue-200"
                 >
                   Retry
                 </button>
+                <ShareButton totalQuestions={totalQuestions} score={score} />
               </div>
             </>
           )}
