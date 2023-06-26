@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import RunningQuiz from './RunningQuiz'
+import RunningQuiz from './components/RunningQuiz'
 import './App.css'
 import { fetchQuizzes } from './fetchQuizzes'
-import ShareButton from './ShareButton'
+import ShareButton from './components/ShareButton'
 
 const sharedButtonStyle =
   'h-full w-32 cursor-pointer bg-gray-300 text-gray-600 outline-none hover:bg-gray-400 hover:text-gray-700'
