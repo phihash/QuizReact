@@ -23,7 +23,6 @@ const CheckBoxItem = ({ choice, selectedCheckBox, setSelectedCheckBox }) => {
             id={checkId}
             checked={selectedCheckBox.includes(choice)}
             onChange={handleCheckChange}
-            name="bordered-checkbox"
             className="mt-0.5 shrink-0 rounded-full border-gray-200 text-blue-600"
           />
           <span className="ml-3 text-lg font-semibold text-gray-600">
