@@ -3,6 +3,7 @@ import RunningQuiz from './components/RunningQuiz'
 import './App.css'
 import { fetchQuizzes } from './fetchQuizzes'
 import ShareButton from './components/ShareButton'
+import DisplayArrayWithBreaks from './components/DisplayArrayWithBreaks'
 
 const sharedButtonStyle =
   'h-full w-32 cursor-pointer bg-gray-300 text-gray-600 outline-none hover:bg-gray-400 hover:text-gray-700'
@@ -65,13 +66,13 @@ function App() {
       <div className="mx-auto max-w-screen-xl px-4 pb-48 pt-12 md:px-8">
         <div className="rounded-lg bg-gray-100 p-4 sm:p-8">
           <div className="flex flex-col items-center">
-            <h2 className="my-6 text-center text-4xl font-bold text-gray-600 sm:mb-8">
+            <h2 className="my-10 text-center text-4xl font-bold text-gray-600 sm:mb-8">
               React Quiz
             </h2>
 
             {quizState === 'beforeTheQuiz' && (
               <>
-                <div className="mb-3 flex w-full max-w-md items-center justify-center gap-6">
+                <div className="mb-8 flex w-full max-w-md items-center justify-center gap-6">
                   <div className="custom-number-input flex h-10 w-40 sm:w-40">
                     <div className="relative flex h-10 w-full flex-row rounded-lg bg-transparent">
                       <button
@@ -109,7 +110,7 @@ function App() {
                     Start
                   </button>
                 </div>
-                <p className="text-center text-sm font-semibold text-gray-500">
+                <p className="mb-2 text-center text-sm font-semibold text-gray-500">
                   問題数(1-100)を選択してください
                 </p>
               </>
@@ -117,7 +118,7 @@ function App() {
 
             {quizState === 'InProgress' ? (
               isLoading ? (
-                <p className="text-2xl font-semibold text-gray-700">
+                <p className="mb-4 text-2xl font-semibold text-gray-700">
                   Loading....
                 </p>
               ) : quizzes.length ? (
@@ -149,9 +150,15 @@ function App() {
                     <h1 className="mb-3 text-xl font-semibold md:text-2xl">
                       Q.{wrongQuiz.question}
                     </h1>
-                    <h2 className="mb-3 text-base font-semibold md:text-xl">
-                      A. {wrongQuiz.answer}
-                    </h2>
+                    {wrongQuiz.isMultipleAnswer ? (
+                      <DisplayArrayWithBreaks array={wrongQuiz.answer} />
+                    ) : (
+                      <>
+                        <h2 className="mb-3 text-base font-semibold md:text-xl">
+                          A. {wrongQuiz.answer}
+                        </h2>
+                      </>
+                    )}
                     <p className="mb-8 text-sm md:text-lg">
                       {wrongQuiz.explanation}
                     </p>
