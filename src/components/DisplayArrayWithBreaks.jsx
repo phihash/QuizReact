@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types'
 
-const DisplayArrayWithBreaks = ({ array }) => {
+const DisplayArrayWithBreaks = ({ wrongQuizzes }) => {
   return (
     <>
-      {array.map((item, index) => (
+      {wrongQuizzes.map((item, index) => (
         <h2
           className={`mb-3 text-base font-semibold md:text-xl ${
             index !== 0 ? 'pl-5' : ''
           }`}
           key={index}
         >
-          {index === 0 ? `A. ${item}` : `${item}`}
+          {index === 0 ? `A. ${item}` : `->${item}`}
         </h2>
       ))}
     </>
@@ -18,7 +18,7 @@ const DisplayArrayWithBreaks = ({ array }) => {
 }
 
 DisplayArrayWithBreaks.propTypes = {
-  array: PropTypes.array.isRequired,
+  wrongQuizzes: PropTypes.array.isRequired,
 }
 
 export default DisplayArrayWithBreaks

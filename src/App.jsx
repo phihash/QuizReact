@@ -153,11 +153,9 @@ function App() {
                     {wrongQuiz.isMultipleAnswer ? (
                       <DisplayArrayWithBreaks array={wrongQuiz.answer} />
                     ) : (
-                      <>
-                        <h2 className="mb-3 text-base font-semibold md:text-xl">
-                          A. {wrongQuiz.answer}
-                        </h2>
-                      </>
+                      <h2 className="mb-3 text-base font-semibold md:text-xl">
+                        A. {wrongQuiz.answer}
+                      </h2>
                     )}
                     <p className="mb-8 text-sm md:text-lg">
                       {wrongQuiz.explanation}
