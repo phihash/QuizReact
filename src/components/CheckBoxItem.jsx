@@ -14,7 +14,7 @@ const CheckBoxItem = ({ choice, selectedCheckBox, setSelectedCheckBox }) => {
     <>
       <div>
         <label
-          className="flex w-full max-w-xs rounded-md p-3 text-sm"
+          className="flex w-full max-w-xs cursor-pointer rounded-md p-3 text-sm"
           htmlFor={checkId}
         >
           <input
@@ -23,7 +23,7 @@ const CheckBoxItem = ({ choice, selectedCheckBox, setSelectedCheckBox }) => {
             id={checkId}
             checked={selectedCheckBox.includes(choice)}
             onChange={handleCheckChange}
-            className="mt-0.5 shrink-0 rounded-full border-gray-200 text-blue-600"
+            className="mt-0.5 shrink-0 cursor-pointer rounded-full border-gray-200 text-blue-600"
           />
           <span className="ml-3 text-lg font-semibold text-gray-600">
             {choice}

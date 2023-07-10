@@ -7,7 +7,7 @@ const RadioItem = ({ choice, setSelectedChoice }) => {
     <div>
       <label
         htmlFor={radioId}
-        className="flex w-full max-w-xs rounded-md p-3 text-sm"
+        className="flex w-full max-w-xs cursor-pointer rounded-md p-3 text-sm"
       >
         <input
           type="radio"
