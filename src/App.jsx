@@ -33,8 +33,8 @@ function App() {
   }
 
   const incrementTotalQuestions = () => {
-    if (totalQuestions > 99) {
-      alert('100問以下でお願いします')
+    if (totalQuestions > 9) {
+      alert('10問以下でお願いします')
     } else {
       setTotalQuestions(totalQuestions + 1)
     }
@@ -49,7 +49,7 @@ function App() {
 
   const changeTotalQuestions = e => {
     const inputNumber = parseInt(e.target.value)
-    if (inputNumber >= 1 && inputNumber <= 100) {
+    if (inputNumber >= 1 && inputNumber <= 10) {
       setTotalQuestions(inputNumber)
     }
   }
@@ -111,7 +111,7 @@ function App() {
                   </button>
                 </div>
                 <p className="mb-2 text-center text-sm font-semibold text-gray-500">
-                  問題数(1-100)を選択してください
+                  問題数(1-10)を選択してください
                 </p>
               </>
             )}
