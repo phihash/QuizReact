@@ -67,7 +67,7 @@ function App() {
         <div className="rounded-lg bg-gray-100 p-4 sm:p-8">
           <div className="flex flex-col items-center">
             <h2 className="my-10 text-center text-4xl font-bold text-gray-600 sm:mb-8">
-              React Quiz
+              クイズ
             </h2>
 
             {quizState === 'beforeTheQuiz' && (
